@@ -39,7 +39,7 @@ Desenvolvimento e Testes
 
 Dependências:
 
- * PHP 5.5.x ou superior
+ * PHP 7.0.x ou superior
  * Composer
  * Git
  * Make
