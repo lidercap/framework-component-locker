@@ -24,6 +24,8 @@ class ExecutionLocker implements LockerInterface
         try {
             $this->isLockFileValid();
             $this->isPidFileValid();
+
+            return file_exists($this->lockFile);
         } catch (\Exception $e) {
             return false;
         }
@@ -37,9 +39,14 @@ class ExecutionLocker implements LockerInterface
      *
      * @return $this
      */
-    public function lock()
+    public function lock() : LockerInterface
     {
+        if ($this->isLocked()) {
+            return $this;
+        }
 
+        touch($this->lockFile);
+        file_put_contents($this->pidFile, $this->pidNumber);
     }
 
     /**
@@ -50,8 +57,7 @@ class ExecutionLocker implements LockerInterface
      *
      * @return $this
      */
-    public function unLock()
+    public function unLock() : LockerInterface
     {
-
     }
 }
