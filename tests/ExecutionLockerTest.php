@@ -95,5 +95,30 @@ class ExecutionLockerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($pidNumber, file_get_contents($pidFile));
     }
 
+    public function testUnlockAlreadyUnlocked()
+    {
+        $object = $this->locker->unLock();
+        $this->assertInstanceOf(LockerInterface::class, $object);
+    }
 
+    public function testUnlockSuccess()
+    {
+        $pidNumber = rand(1, 100);
+        $lockFile  = '/tmp/test.lock';
+        $pidFile   = '/tmp/test.pid';
+
+        $this->locker->setLockFile($lockFile);
+        $this->locker->setPidFile($pidFile);
+        $this->locker->setPidNumber($pidNumber);
+
+        $this->locker->lock();
+        $this->assertTrue($this->locker->isLocked());
+
+        $object = $this->locker->unLock();
+        $this->assertInstanceOf(LockerInterface::class, $object);
+
+        $this->assertFalse($this->locker->isLocked());
+        $this->assertFileNotExists($lockFile);
+        $this->assertFileNotExists($pidFile);
+    }
 }

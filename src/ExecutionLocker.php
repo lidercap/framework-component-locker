@@ -61,5 +61,13 @@ class ExecutionLocker implements LockerInterface
      */
     public function unLock() : LockerInterface
     {
+        if (!$this->isLocked()) {
+            return $this;
+        }
+
+        @unlink($this->pidFile);
+        @unlink($this->lockFile);
+
+        return $this;
     }
 }
