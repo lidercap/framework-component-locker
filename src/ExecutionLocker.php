@@ -52,7 +52,7 @@ class ExecutionLocker implements LockerInterface
     }
 
     /**
-     * Remove um lock
+     * Remove um lock.
      *
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
