@@ -10,7 +10,7 @@ interface LockerInterface
     /**
      * @param string $lockPath
      */
-    public function setLockFile($lockPath);
+    public function setLockFile(string $lockPath);
 
     /**
      * Verifica se há lock ativo.
