@@ -29,7 +29,7 @@ interface LockerInterface
      *
      * @return $this
      */
-    public function lock();
+    public function lock() : LockerInterface;
 
     /**
      * Remove um lock
@@ -39,5 +39,5 @@ interface LockerInterface
      *
      * @return $this
      */
-    public function unLock();
+    public function unLock() : LockerInterface;
 }
