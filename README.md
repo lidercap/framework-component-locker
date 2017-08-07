@@ -22,15 +22,58 @@ Instalação
 }
 ```
 
-NOME DA FUNÇÃO
---------------
+ExecutionLocker::isLocked()
+---------------------------
 
-Descrição da função.
+Verifica se há lock de execussão.
 
 ```php
 <?php
 
-// Coloque aqui exemplos de uso
+$locker = new \Lidercap\Component\Locker\ExecutionLoker();
+$locker->setLockFile('/path/to/lock/file.lock');
+$locker->setPidFile('/path/to/pid/file.pid');
+$locker->setPidNumber(123);
+
+var_dump($locker->isLocked()); // TRUE | FALSE
+
+```
+
+ExecutionLocker::lock()
+-----------------------
+
+Cria um lock de execussão.
+
+```php
+<?php
+
+$locker = new \Lidercap\Component\Locker\ExecutionLoker();
+$locker->setLockFile('/path/to/lock/file.lock');
+$locker->setPidFile('/path/to/pid/file.pid');
+$locker->setPidNumber(123);
+
+$locker->lock();
+
+var_dump($locker->isLocked()); // TRUE
+
+```
+
+ExecutionLocker::unLock()
+-------------------------
+
+Remove um lock de execussão.
+
+```php
+<?php
+
+$locker = new \Lidercap\Component\Locker\ExecutionLoker();
+$locker->setLockFile('/path/to/lock/file.lock');
+$locker->setPidFile('/path/to/pid/file.pid');
+$locker->setPidNumber(123);
+
+$locker->unLock();
+
+var_dump($locker->isLocked()); // FALSE
 
 ```
 
