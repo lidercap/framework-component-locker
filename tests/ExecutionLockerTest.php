@@ -74,4 +74,21 @@ class ExecutionLockerTest extends \PHPUnit_Framework_TestCase
 
         $this->locker->lock();
     }
+
+    public function testLockSuccess()
+    {
+        $pidNumber = rand(1, 100);
+        $lockFile  = '/tmp/test.lock';
+        $pidFile   = '/tmp/test.pid';
+
+        $this->locker->setLockFile($lockFile);
+        $this->locker->setPidFile($pidFile);
+        $this->locker->setPidNumber($pidNumber);
+
+        $this->locker->lock();
+
+        $this->assertFileExists($lockFile);
+        $this->assertEquals(null, file_get_contents($lockFile));
+        $this->assertEquals($pidNumber, file_get_contents($pidFile));
+    }
 }

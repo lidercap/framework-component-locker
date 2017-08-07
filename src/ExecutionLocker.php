@@ -47,6 +47,8 @@ class ExecutionLocker implements LockerInterface
 
         touch($this->lockFile);
         file_put_contents($this->pidFile, $this->pidNumber);
+
+        return $this;
     }
 
     /**
