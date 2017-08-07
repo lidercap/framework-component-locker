@@ -1,22 +1,22 @@
-Nome do Projeto
-===============
+Component Locker
+================
 
-Aqui vai uma pequena descrição do projeto, falando um pouco sobre seu propósito e os problemas que ele se propõe a resolver.
+Gerenciador de lock de recursos e execussões.
 
 Instalação
 ----------
 
-É recomendado instalar **[nome-do-projeto]** através do [composer](http://getcomposer.org).
+É recomendado instalar **component-locker** através do [composer](http://getcomposer.org).
 
 ```json
 {
     "require": {
-        "lidercap/framework-[nome-do-projeto]": "dev-master"
+        "lidercap/framework-component-locker": "dev-master"
     },
     "repositories": [
         {
             "type": "vcs",
-            "url":  "git@bitbucket.org:lidercap/framework-[nome-do-projeto].git"
+            "url":  "git@bitbucket.org:lidercap/framework-component-locker.git"
         }
     ]
 }
