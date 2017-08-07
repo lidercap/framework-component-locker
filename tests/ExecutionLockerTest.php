@@ -21,4 +21,9 @@ class ExecutionLockerTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertInstanceOf(LockerInterface::class, $this->locker);
     }
+
+    public function testIsNotLocked()
+    {
+        $this->assertFalse($this->locker->isLocked());
+    }
 }

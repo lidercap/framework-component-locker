@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Lidercap\Component\Locker;
 
 use Lidercap\Component\Locker\Behavior;
@@ -17,9 +19,9 @@ class ExecutionLocker implements LockerInterface
      *
      * @return bool
      */
-    public function isLocked()
+    public function isLocked() : bool
     {
-
+        return false;
     }
 
     /**

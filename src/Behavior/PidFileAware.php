@@ -18,10 +18,14 @@ trait PidFileAware
      * @codeCoverageIgnore
      *
      * @param string $pidFile
+     *
+     * @return $this
      */
-    public function setPidFile($pidFile)
+    public function setPidFile(string $pidFile)
     {
         $this->pidFile = $pidFile;
+
+        return $this;
     }
 
     /**
@@ -29,7 +33,7 @@ trait PidFileAware
      *
      * @return string
      */
-    public function getPidFile()
+    public function getPidFile() : string
     {
         return $pidFile;
     }
@@ -38,10 +42,14 @@ trait PidFileAware
      * @codeCoverageIgnore
      *
      * @param int $pidNumber
+     *
+     * @return $this
      */
-    public function setPidNumber($pidNumber)
+    public function setPidNumber(int $pidNumber)
     {
         $this->pidNumber = $pidNumber;
+
+        return $this;
     }
 
     /**
@@ -49,7 +57,7 @@ trait PidFileAware
      *
      * @return int
      */
-    public function getPidNumber()
+    public function getPidNumber() : int
     {
         return $this->pidNumber;
     }

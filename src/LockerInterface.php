@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Lidercap\Component\Locker;
 
 /**
@@ -17,7 +19,7 @@ interface LockerInterface
      *
      * @return bool
      */
-    public function isLocked();
+    public function isLocked() : bool;
 
     /**
      * Cria um lock.
