@@ -13,10 +13,14 @@ trait LockFileAware
      * @codeCoverageIgnore
      *
      * @param string $lockFile
+     *
+     * @return $this
      */
-    public function setLockFile($lockFile)
+    public function setLockFile(string $lockFile)
     {
         $this->lockFile = $lockFile;
+
+        return $this;
     }
 
     /**
