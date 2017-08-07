@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Lidercap\Component\Locker\Behavior;
 
 trait PidFileAware
@@ -7,12 +9,12 @@ trait PidFileAware
     /**
      * @var string
      */
-    protected $pidFile;
+    protected $pidFile = '';
 
     /**
      * @var int
      */
-    protected $pidNumber;
+    protected $pidNumber = 0;
 
     /**
      * @codeCoverageIgnore
@@ -75,7 +77,7 @@ trait PidFileAware
             throw new \InvalidArgumentException($message, -1);
         }
 
-        if (!strlen($this->pidNumber)) {
+        if ($this->pidNumber === 0) {
             $message = '"pidNumber" não informado';
             throw new \InvalidArgumentException($message, -2);
         }

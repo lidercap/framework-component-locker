@@ -21,7 +21,12 @@ class ExecutionLocker implements LockerInterface
      */
     public function isLocked() : bool
     {
-        return false;
+        try {
+            $this->isLockFileValid();
+            $this->isPidFileValid();
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 
     /**
