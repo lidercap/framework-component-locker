@@ -16,8 +16,41 @@ class LockFileAwareTest extends \PHPUnit_Framework_TestCase
         $this->trait = $this->getMockForTrait(LockFileAware::class);
     }
 
-    public function testIsLockFileValid()
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage "lockFile" não informado
+     * @expectedExceptionCode -1
+     */
+    public function testIsLockFileValidException1()
     {
-        $this->assertEquals(1, 1);
+        $method = new \ReflectionMethod($this->trait, 'isLockFileValid');
+        $method->setAccessible(true);
+
+        $method->invoke($this->trait);
+    }
+
+    /**
+     * @expectedException \RunTimeException
+     * @expectedExceptionMessage Diretório sem permissão de escrita: /root
+     * @expectedExceptionCode -2
+     */
+    public function testIsLockFileValidException2()
+    {
+        $this->trait->setLockFile('/root/file.lock');
+
+        $method = new \ReflectionMethod($this->trait, 'isLockFileValid');
+        $method->setAccessible(true);
+
+        $method->invoke($this->trait);
+    }
+
+    public function testIsLockFileValidSuccess()
+    {
+        $this->trait->setLockFile('/tmp/file.lock');
+
+        $method = new \ReflectionMethod($this->trait, 'isLockFileValid');
+        $method->setAccessible(true);
+
+        $method->invoke($this->trait);
     }
 }
