@@ -21,6 +21,7 @@ class ExecutionLockerTest extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         array_map('unlink', glob('/tmp/*.lock'));
+        array_map('unlink', glob('/tmp/*.pid'));
     }
 
     public function testInterface()
@@ -72,7 +73,8 @@ class ExecutionLockerTest extends \PHPUnit_Framework_TestCase
         $this->locker->setPidFile('/tmp/test.lock');
         $this->locker->setPidNumber(rand(1, 100));
 
-        $this->locker->lock();
+        $object = $this->locker->lock();
+        $this->assertInstanceOf(LockerInterface::class, $object);
     }
 
     public function testLockSuccess()
@@ -85,10 +87,13 @@ class ExecutionLockerTest extends \PHPUnit_Framework_TestCase
         $this->locker->setPidFile($pidFile);
         $this->locker->setPidNumber($pidNumber);
 
-        $this->locker->lock();
+        $object = $this->locker->lock();
+        $this->assertInstanceOf(LockerInterface::class, $object);
 
         $this->assertFileExists($lockFile);
         $this->assertEquals(null, file_get_contents($lockFile));
         $this->assertEquals($pidNumber, file_get_contents($pidFile));
     }
+
+
 }
