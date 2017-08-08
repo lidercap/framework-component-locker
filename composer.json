@@ -1,7 +1,7 @@
 {
   "name": "lidercap/framework-component-locker",
   "description": "Gerenciador de lock de recursos e execussões",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "proprietary",
   "type": "library",
   "config": {
