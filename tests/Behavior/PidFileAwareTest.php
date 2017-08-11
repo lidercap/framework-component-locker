@@ -7,13 +7,44 @@ use Lidercap\Component\Locker\Behavior\PidFileAware;
 class PidFileAwareTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @var string
+     */
+    protected $pidFile;
+
+    /**
      * @var PidFileAware
      */
     protected $trait;
 
     public function setUp()
     {
-        $this->trait = $this->getMockForTrait(PidFileAware::class);
+        $this->pidFile = '/tmp/pidfile-' . md5(microtime(true));
+        $this->trait   = $this->getMockForTrait(PidFileAware::class);
+    }
+
+    public function tearDown()
+    {
+        @unlink($this->pidFile);
+    }
+
+    /**
+     * @expectedException \RuntimeException
+     * @expectedExceptionMessagePID file não encontrado: /non/existent/file.pid
+     * @expectedExceptionCode -1
+     */
+    public function testGetPidNumberException()
+    {
+        $this->trait->setPidFile('/non/existent/file.pid');
+        $this->trait->getPidNumber();
+    }
+
+    public function testGetPidNumberSuccess()
+    {
+        $pid = rand(100, 200);
+        file_put_contents($this->pidFile, (int)$pid);
+        $this->trait->setPidFile($this->pidFile);
+
+        $this->assertEquals($pid, $this->trait->getPidNumber());
     }
 
     /**

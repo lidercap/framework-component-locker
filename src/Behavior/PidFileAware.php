@@ -55,13 +55,18 @@ trait PidFileAware
     }
 
     /**
-     * @codeCoverageIgnore
+     * @throws \RunTimeException
      *
      * @return int
      */
     public function getPidNumber() : int
     {
-        return $this->pidNumber;
+        if (!file_exists($this->pidFile)) {
+            $message = sprintf('PID file não encontrado: %s', $this->pidFile);
+            throw new \RunTimeException($message, -1);
+        }
+
+        return (int)file_get_contents($this->pidFile);
     }
 
     /**
