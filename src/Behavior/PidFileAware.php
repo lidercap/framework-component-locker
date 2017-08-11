@@ -37,7 +37,7 @@ trait PidFileAware
      */
     public function getPidFile() : string
     {
-        return $pidFile;
+        return $this->pidFile;
     }
 
     /**
